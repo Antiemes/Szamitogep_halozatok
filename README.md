@@ -1,4 +1,8 @@
-# Bevezetés
+# Alhálózat felosztás
+
+[Segédlet](https://www.youtube.com/watch?v=ikSQoPjdVw4)
+
+# Linux
 
 ## A munkakörnyezet
 
