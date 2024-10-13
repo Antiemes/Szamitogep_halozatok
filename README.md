@@ -28,7 +28,15 @@ hogy melyik terminálon, vagy távoli belépés esetén milyen IP címről lépe
 ### `ip`
 
 Az `ip` egy sokoldaló konfigurációs eszköz, ami többek közt a hálózati interfészek
-állapotáról tud információt adni.
+állapotáról tud információt adni. Interfészek címeinek lekérdezése:
+
+```bash
+ip address show
+```
+
+A parancsot rövidíthetjük, például `ip addr show` formában. Az `address`-hez tartozó
+alapértelmezett akció a `show`, így azt elhagyhatjuk és használhatjuk az `ip address`,
+`ip addr`, vagy egyszerűen `ip a` verziót is.
 
 ### `ssh`
 
