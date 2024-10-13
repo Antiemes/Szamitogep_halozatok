@@ -134,6 +134,19 @@ gépen az aktuális könyvtárba.
 scp user@1.2.3.4:/tmp/valami.txt .
 ```
 
+A távoli gépen a `/var/www` könyvtárban levő `valami.txt` nevű fájlt lemásoljuk
+a helyi gép `/tmp` könyvtárába.
+
+```bash
+scp user@1.2.3.4:/var/www/valami.txt /tmp
+```
+
+A távoli gépen a `/var/www` könyvtárban levő `valami.txt` nevű fájlt lemásoljuk
+a helyi gép `/tmp` könyvtárába `uj.txt` néven.
+
+```bash
+scp user@1.2.3.4:/var/www/valami.txt /tmp/uj.txt
+```
 
 ### `rsync`
 
