@@ -99,28 +99,40 @@ könyvtárunkba kerül.
 
 Néhány példa:
 
-A helyi gépen levő `valami.txt` nevű fájlt a távoli gépen (ahova a `user` a loginnevünk,
-a gép IP címe pedig 1.2.3.4) a saját home könyvtárunkba másoljuk.
+(A példák mindegyikében a távoli gépet az `1.2.3.4`-es IP címmel azonosítjuk, felhasználónevünk
+pedig `user`.)
+
+A helyi gépen levő `valami.txt` nevű fájlt a távoli gépen a saját home könyvtárunkba másoljuk.
 
 ```bash
 scp valami.txt user@1.2.3.4:
 ```
 
-A helyi gépen levő `valami.txt` nevű fájlt a távoli gépen (ahova a `user` a loginnevünk,
-a gép IP címe pedig 1.2.3.4) a `/tmp` könyvtárba másoljuk.
+A helyi gépen levő `valami.txt` nevű fájlt a távoli gépen a `/tmp` könyvtárba másoljuk.
 
 ```bash
 scp valami.txt user@1.2.3.4:/tmp
 ```
 
-A helyi gépen levő `valami.txt` nevű fájlt a távoli gépen (ahova a `user` a loginnevünk,
-a gép IP címe pedig 1.2.3.4) a `/tmp` könyvtárba másoljuk `masik.txt` néven.
+A helyi gépen levő `valami.txt` nevű fájlt a távoli gépen a `/tmp` könyvtárba másoljuk `masik.txt` néven.
 
 ```bash
 scp valami.txt user@1.2.3.4:/tmp/masik.txt
 ```
 
+A távoli gépen a saját home könyvtárunkban levő `valami.txt` nevű fájlt lemásoljuk a helyi
+gépen az aktuális könyvtárba. (Az aktuális könyvtárt `.` (pont) jelöli.)
 
+```bash
+scp user@1.2.3.4:valami.txt .
+```
+
+A távoli gépen a `/tmp` könyvtárban levő `valami.txt` nevű fájlt lemásoljuk a helyi
+gépen az aktuális könyvtárba.
+
+```bash
+scp user@1.2.3.4:/tmp/valami.txt .
+```
 
 
 ### `rsync`
