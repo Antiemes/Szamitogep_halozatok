@@ -72,11 +72,51 @@ de egyéb protokollokkal igen, illetve ugyanez fordítva is lehetséges.
 
 ### `scp`
 
+Az SCP (Secure Copy) segítségével egy távoli gép és a sajátunk között tudunk biztonságosan
+fájlokat másolni. Általában ahova az SSH belépés engedélyezett, ott az SCP-t is tudjuk
+használni, de lehetnek kivételek mindkét irányban.
+
+Az SCP használata:
+
 ```bash
 scp forrás cél
 ```
 
-Akár a forrás, akár a cél lehet helyi, vagy távoli fájl.
+Akár a forrás, akár a cél lehet helyi, vagy távoli fájl. A helyi fájlokat azok útvonalával
+adjuk meg. Ez lehet abszolút, vagy relatív útvonalmegadás is.
+
+A távoli gépen levő fájl megadásához először egy, az SSH-nál is használt `user@host`
+kombináció kell. Ezt követi egy `:` (**kettőspont**), majd végül az útvonal.
+
+Ha a cél a távoli gépen van, akkor az útvonal elhagyható (de a `:`-ot ebben az esetben is
+ki kell írni!). Ilyenkor a fájl a forrással azonos néven a távoli gépen levő home
+könyvtárunkba kerül.
+
+Néhány példa:
+
+A helyi gépen levő `valami.txt` nevű fájlt a távoli gépen (ahova a `user` a loginnevünk,
+a gép IP címe pedig 1.2.3.4) a saját home könyvtárunkba másoljuk.
+
+```bash
+scp valami.txt user@1.2.3.4:
+```
+
+A helyi gépen levő `valami.txt` nevű fájlt a távoli gépen (ahova a `user` a loginnevünk,
+a gép IP címe pedig 1.2.3.4) a `/tmp` könyvtárba másoljuk.
+
+```bash
+scp valami.txt user@1.2.3.4:/tmp
+```
+
+A helyi gépen levő `valami.txt` nevű fájlt a távoli gépen (ahova a `user` a loginnevünk,
+a gép IP címe pedig 1.2.3.4) a `/tmp` könyvtárba másoljuk `masik.txt` néven.
+
+```bash
+scp valami.txt user@1.2.3.4:/tmp/masik.txt
+```
+
+
+
 
 ### `rsync`
 
