@@ -156,7 +156,7 @@ rsync --partial --progress --inplace --recursive
 
 ### Hash képzés
 
-Fontosan hash-ek: MD5, SHA1, SHA128, SHA256, SHA512. Az MD5 már nem tekinthető kriptográfiailag
+Fontosabb hash-ek: MD5, SHA1, SHA128, SHA256, SHA512. Az MD5 már nem tekinthető kriptográfiailag
 kellően megbízhatónak, de ennek ellenére még használatban van. (Átviteli hibák detektálására alkalmas.)
 
 A következő példák a `file1`, a `file1` és a `file2`, illetve az aktuális könyvtárban található
