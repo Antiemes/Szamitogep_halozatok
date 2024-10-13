@@ -55,6 +55,21 @@ A `host` mező domain nevet és IP címet is jelenthet.
 
 ### `ping`
 
+A `ping` paranccsal a hálózati kapcsolatot tudjuk tesztelni például a következő
+formában:
+
+```bash
+ping host
+```
+
+Ez a parancs másodpercenként fog egy üzenetváltást indítani és folyamatosan működik, addig,
+amíg a programot le nem állítjuk. A parancs számos paraméterét szabályozhatjuk,
+például az elküldendő üzenetek számát, gyakoriságát, méretét stb.
+
+Fontos megjegyezni, hogy a `ping` az ICMP protokollt, illetve annak echo és echo reply
+üzeneteit használja, így előfordulhat, hogy ezek tiltása miatt a célállomást nem érjük el,
+de egyéb protokollokkal igen, illetve ugyanez fordítva is lehetséges.
+
 ### `scp`
 
 ```bash
