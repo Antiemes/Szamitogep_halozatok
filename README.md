@@ -186,6 +186,18 @@ sha512sum *
 
 ### Nyilvános kulcs alapú autentikáció
 
+A nyilvános kulcsú authentikációval jelszó helyett kulcs segítségével léphetünk be egy távoli
+számítógépre. Ehhez a helyi gépen el kell készíteni egy (titkos és nyilvános kulcsból álló)
+*kulcspárt*, amiből a *nyilvános kulcsot* fel kell másolni a távoli gépre.
+
+A kulcspár előállítása (a helyi gépen):
+
+```bash
+ssh-keygen
+```
+
+A nyilvános kulcs a `.ssh/id_rsa.pub` néven, a titkos kulcs `.ssh/id_rsa` néven keletkezik.
+
 ### `netcat`
 
 A szerveren *hallgatunk* (listen) egy porton:
