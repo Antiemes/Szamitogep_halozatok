@@ -160,7 +160,7 @@ Fontosabb hash-ek: MD5, SHA1, SHA128, SHA256, SHA512. Az MD5 már nem tekinthet�
 kellően megbízhatónak, de ennek ellenére még használatban van. (Átviteli hibák detektálására alkalmas.)
 
 A következő példák a `file1`, a `file1` és a `file2`, illetve az aktuális könyvtárban található
-fájlok MD5, SHA1, SHA128, SHA256 és SHA512 hash-ét számítják ki.
+össes fájl MD5, SHA1, SHA128, SHA256 és SHA512 hash-ét számítják ki.
 
 ```bash
 md5sum file1
