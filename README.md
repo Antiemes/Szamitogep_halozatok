@@ -6,11 +6,16 @@
 
 ## A munkakörnyezet
 
-A gyakorlaton Linux alatt fogunk dolgozni. Háromféle rendszert fogunk használni.
+A gyakorlaton Linux alatt fogunk dolgozni. Kétféle rendszert fogunk használni.
 
-  * Fizikai számítógépen futó rendszert
-  * Virtuális gépet
+  * A laborgépen futó rendszert
+    - Manjaro Linux KDE környezettel
+    - Felhasználónevünk: `hallgato`
   * Távolról elérhető számítógépet
+    - Debian Linux
+    - A laborhálózatról a 10.22.3.216 IP címen érhető el
+    - Felhasználónevünk: Neptun kód csupa kisbetűvel
+    - Alapértelmezett jelszó: 123, amit az első órák egyikén megváltoztattunk
 
 ## Hálózati munkához kapcsolódó / általános Linux parancsok, programok
 
