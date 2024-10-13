@@ -40,6 +40,19 @@ alapértelmezett akció a `show`, így azt elhagyhatjuk és használhatjuk az `i
 
 ### `ssh`
 
+Az SSH (Secure Shell) egy távoli gépre történő biztonságos parancssori (shell) belépésre
+használható, amennyiben ez a távoli gépen engedélyezve van és rendelkezünk a megfelelő
+belépési adatokkal. Használata:
+
+```bash
+ssh user@host
+```
+
+A `user` a felhasználónevünket jelenti. Ez a mező (a `@` jellel együtt) elhagyható,
+ekkor a parancs a jelenlegi felhasználónevöóünket használja.
+
+A `host` mező domain nevet és IP címet is jelenthet.
+
 ### `ping`
 
 ### `scp`
