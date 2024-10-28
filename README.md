@@ -198,7 +198,7 @@ ssh-keygen
 
 A nyilvános kulcs a `.ssh/id_rsa.pub` néven, a titkos kulcs `.ssh/id_rsa` néven keletkezik.
 
-### `netcat`
+### TCP kapcsolat létrehozása `netcat`-tel
 
 A szerveren *hallgatunk* (listen) egy porton:
 
@@ -206,7 +206,13 @@ A szerveren *hallgatunk* (listen) egy porton:
 netcat -l -p 12345
 ```
 
+Szükségünk van a szerver IP címére is, amit az `ip a` paranccsal tudunk lekérdezni. Legyen most a szerver
+IP címe `1.2.3.4`.
+
 A kliensen *csatlakozunk* a portra:
 
 ```bash
-netcat
+netcat 1.2.3.4 12345
+```
+
+
