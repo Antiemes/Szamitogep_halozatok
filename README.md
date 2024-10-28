@@ -154,6 +154,39 @@ scp user@1.2.3.4:/var/www/valami.txt /tmp/uj.txt
 rsync --partial --progress --inplace --recursive
 ```
 
+### TCP kapcsolat létrehozása `netcat`-tel
+
+A szerveren *hallgatunk* (listen) egy porton:
+
+```bash
+netcat -l -p 12345
+```
+
+Szükségünk van a szerver IP címére is, amit az `ip a` paranccsal tudunk lekérdezni. Legyen most a szerver
+IP címe `1.2.3.4`.
+
+A kliensen *csatlakozunk* a portra:
+
+```bash
+netcat 1.2.3.4 12345
+```
+
+## Kódolási eljárások és kriptográfia
+
+### BASE64 kódolás
+
+Kódolás:
+
+```bash
+base64 szoveg.txt > kodolt.txt
+```
+
+Dekódolás:
+
+```bash
+base64 -d kodolt.txt
+```
+
 ### Hash képzés
 
 Fontosabb hash-ek: MD5, SHA1, SHA128, SHA256, SHA512. Az MD5 már nem tekinthető kriptográfiailag
@@ -198,21 +231,16 @@ ssh-keygen
 
 A nyilvános kulcs a `.ssh/id_rsa.pub` néven, a titkos kulcs `.ssh/id_rsa` néven keletkezik.
 
-### TCP kapcsolat létrehozása `netcat`-tel
-
-A szerveren *hallgatunk* (listen) egy porton:
+### Szimmetrikus kulcsú titkosító használata
 
 ```bash
-netcat -l -p 12345
+openssl aes-256-cbc -a -salt -pbkdf2 -in nyiltszoveg.txt -out titkosszoveg.enc
 ```
-
-Szükségünk van a szerver IP címére is, amit az `ip a` paranccsal tudunk lekérdezni. Legyen most a szerver
-IP címe `1.2.3.4`.
-
-A kliensen *csatlakozunk* a portra:
 
 ```bash
-netcat 1.2.3.4 12345
+openssl aes-256-cbc -d -a -pbkdf2 -in titkosszoveg.enc -out uj_nyiltszoveg.txt
 ```
+
+Ehhez hasonlóan használhatunk például `AES-128`, `3DES`, vagy egyéb titkosítót is.
 
 
