@@ -243,4 +243,8 @@ openssl aes-256-cbc -d -a -pbkdf2 -in titkosszoveg.enc -out uj_nyiltszoveg.txt
 
 Ehhez hasonlóan használhatunk például `AES-128`, `3DES`, vagy egyéb titkosítót is.
 
+A cbc mellett használhatunk más módot is (pl. cfb, vagy ctr).
+
+Próbáljuk ki az ecb (elektronikus kódkönyv) módot is. Vigyázat! Ez a mód nem biztonságos.
+
 
