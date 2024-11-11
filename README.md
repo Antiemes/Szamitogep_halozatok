@@ -171,6 +171,8 @@ A kliensen *csatlakozunk* a portra:
 netcat 1.2.3.4 12345
 ```
 
+### `wget` és `curl`
+
 ## Kódolási eljárások és kriptográfia
 
 ### BASE64 kódolás
@@ -247,4 +249,86 @@ A cbc mellett használhatunk más módot is (pl. cfb, vagy ctr).
 
 Próbáljuk ki az ecb (elektronikus kódkönyv) módot is. Vigyázat! Ez a mód nem biztonságos.
 
+### Digitális aláírás
+
+#### Kulcsok listázása
+
+Nyilvános kulcsok:
+
+```bash
+gpg --list-keys
+```
+
+Titkos kulcsok:
+
+```bash
+gpg --list-secret-keys
+```
+
+#### Kulcspár generálása
+
+```bash
+gpg --gen-key
+```
+
+#### Publikus kulcs exportálása
+
+```bash
+gpg --output kulcs.gpg --export valaki@pelda.com
+```
+
+Vagy:
+
+```bash
+gpg --output kulcs.gpg --export HASH
+```
+
+A `--armor` kapcsolóval ASCII formátumú kulcsot kapunk.
+
+A `kulcs.gpg` minden esetben a *publikus* kulcsunkat tartalmazza. Ahhoz, hogy valaki ellenőrizni tudja
+azt, amit én aláírok, rendelkeznie kell ezzel a publikus kulccsal.
+
+ * Aláírás: *titkos kulcs*
+ * Ellenőrzés: *publikus kulcs*
+
+#### Aláírás
+
+```bash
+gpg --sign uzenet.txt
+```
+
+Ez a parancs az `uzenet.txt` fájlt írja alá. A keletkezett új file neve mindig az eredeti, plusz a `.gpg` toldalék. Formátuma bináris.
+Generálhatunk ASCII formátumú aláírást is a `--armor` kapcsolóval. A `--default-key` kapcsoló után egy kulcsot választhatunk név, vagy
+hash alapján. Például:
+
+```bash
+gpg --sign --armor --default-key 'vg@electrit.hu' uzenet.txt
+```
+
+A `--armor` kapcsolóval a keletkezett fájl ASCII formátumú lesz.
+
+#### Ellenőrzés
+
+Miután importáltuk a megfelelő publikus kulcsot:
+
+```bash
+gpg --verify uzenet.txt.sig
+```
+
+Vagy:
+
+
+```bash
+gpg --verify uzenet.txt.asc
+```
+
+#### Kulcsok törlése
+
+```bash
+gpg --delete-secret-key
+```
+
+```bash
+gpg --delete-key
+```
 
