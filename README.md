@@ -235,19 +235,57 @@ A nyilvános kulcs a `.ssh/id_rsa.pub` néven, a titkos kulcs `.ssh/id_rsa` név
 
 ### Szimmetrikus kulcsú titkosító használata
 
+Számos kommunikációs protokoll tartalmaz beépített titkosítási lehetőséget, illetve számos egyéb szoftver is
+alkalmas ilyen megoldást. A továbbiakban az OpenSSL példáján keresztül fogjuk megvizsgálni a titkosító
+eljárásokat.
+
+Az OpenSSL-en keresztül mind szimmetrikus, mind nyílt kulcsú titkosítást tudunk hasznáni. Most csak az előbbivel
+fogunk foglalkozni. A gyakorlatban használt szimmetrikus titkosítási eljárások szinte kivétel nélkül blokk kódolók.
+Ahhoz, hogy ezek valamelyikét használni tudjuk, a következőkre van szükségünk:
+
+ * A titkosító eljárás kiválasztására (ez lehet például **DES, 3DES, vagy AES**).
+ * A blokkméret és a kulcsméret kiválasztása (amennyiben többfélével is működik az algoritmus). Az AES esetében **128, 192 és 256 bites** verziók közül választhatunk.
+ * A blokk kódoló használati módjának kiválasztására. Ez **ECB, CBC, OFB, CFB, vagy CTR** lehet. Az OpenSSL nem implementálja az összes lehetséges kombinációt.
+ * A kulcselőállátási algoritmusra (key derivation function). Ez a továbbiakban minden esetben a **PBKDF2** lesz. Ez az algoritmus egy jelszóból egy, a titkosításhoz szükséges kulcsot tud előállítani. A további példákban azt is megadjuk, hogy a jelszó legyen **sózvaa**.
+
+#### Titkosítás
+
+A következő példában a `nyiltszoveg.txt` fájlt titkosítjuk el, ezzel előállítva a `titkosszoveg.enc` fájlt. Az `aes-256-cbc` paraméter
+AES titkosítást, 256 bites működést és *CBC* módot állít be. A fentiek alapján egyéb kombinációk is lehetségesek.
+
 ```bash
 openssl aes-256-cbc -a -salt -pbkdf2 -in nyiltszoveg.txt -out titkosszoveg.enc
 ```
+
+#### Visszafejtés
+
+A visszgafejtésnél a `titkosszoveg.enc` fájlt fejtjük vissza, ezzel előállítva az `uj_nyiltszoveg.txt`-t. A visszafejtésnél
+ugyanazt a működési módot kell használni, mint a titkosításnál.
 
 ```bash
 openssl aes-256-cbc -d -a -pbkdf2 -in titkosszoveg.enc -out uj_nyiltszoveg.txt
 ```
 
-Ehhez hasonlóan használhatunk például `AES-128`, `3DES`, vagy egyéb titkosítót is.
+A lehetséges kulcsméretek tehát az AES-hez:
 
-A cbc mellett használhatunk más módot is (pl. cfb, vagy ctr).
+  * aes-128
+  * aes-192
+  * aes-256
+
+
+A lehetséges blokk módok:
+
+  * ecb
+  * cbc
+  * ofb
+  * cfb
+  * ctr
+
+#### Az ECB mód sérülékenysége
 
 Próbáljuk ki az ecb (elektronikus kódkönyv) módot is. Vigyázat! Ez a mód nem biztonságos.
+
+(TBD)
 
 ### Digitális aláírás
 
