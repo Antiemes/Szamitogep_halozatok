@@ -391,13 +391,13 @@ Az egyes kiegészítő kapcsolók (`--armor`, `--default-key`) itt is használha
 
 #### Ellenőrzés
 
-Miután importáltuk a megfelelő publikus kulcsot:
+Az ellenőrzéshez először importálni kell a publikus kulcsot. A következő példában a kulcs a `kulcs.gpg` fájlban van:
 
 ```bash
-gpg --verify uzenet.txt.sig
+gpg --import kulcs.gpg
 ```
 
-Vagy:
+Ezután az ellenőrzés a következő módon tehető meg:
 
 
 ```bash
