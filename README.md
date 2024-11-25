@@ -289,7 +289,17 @@ Próbáljuk ki az ecb (elektronikus kódkönyv) módot is. Vigyázat! Ez a mód 
 
 ### Digitális aláírás
 
+A titkosító algoritmusokhoz hasonlóan digitális aláírást is számos szoftver implementál. Most a GPG (GNU Privacy Guard)
+példáján keresztül vizsgáljuk ezt meg. A GPG segítségével egy dokumentumot (tetszőleges fájlt) láthatunk el digitális aláírással,
+melyet természetesen ellenőrizni is tudunk. A digitális aláírás nem jelent titkosítást!
+
 #### Kulcsok listázása
+
+A digitális aláírás nyílt kulcsú titkosító algoritmust használ (amivel azonban nem magát a dokumentumot titkosítja!).
+Ahhoz, hogy a egy dokumentumot aláírhassunk, szükség van a kulcspár titkos részére (a titkos kulcsra). Az
+aláírás ellenőrzéséhez ugyanezen pár nyilvános részére (a nyilvános kulcsra) van szükség.
+
+A kulcsainkat a következő módon listázhatjuk:
 
 Nyilvános kulcsok:
 
@@ -305,11 +315,22 @@ gpg --list-secret-keys
 
 #### Kulcspár generálása
 
+Egy kulcspárt (ami egy titkos és egy nyilvános kulcsból áll) a következő paranccsal állíthatunk elő.
+
 ```bash
 gpg --gen-key
 ```
 
+A titkos kulcsot egy jelszóval is levédhetjük. Ilyenkor a GPG minden alkalommal, amikor a titkos kulcshoz hozzá szeretnénk férni,
+ezt a jelszót fogja kérni tőlünk.
+
 #### Publikus kulcs exportálása
+
+Ahhoz, hogy valaki ellenőrizni tudja az aláírt dokumentumot, a mi nyilvános kulcsunkra van szüksége. Ezt valamilyen módon ki kell nyernünk és
+mint fájlt kell továbbítanunk a másik személynek.
+
+A kulcs kinyerése (`kulcs.gpg`) fájlba a következő paranccsal történik. Az egyik parancs a megadott e-mail cím alapján azonosítja a kulcsot,
+a másik pedig a hash alapján. (A kulcslistában mindkettőt látjuk.)
 
 ```bash
 gpg --output kulcs.gpg --export valaki@pelda.com
@@ -321,15 +342,25 @@ Vagy:
 gpg --output kulcs.gpg --export HASH
 ```
 
-A `--armor` kapcsolóval ASCII formátumú kulcsot kapunk.
+A `--armor` kapcsolóval ASCII formátumú kulcsot kapunk, anélkül binárisat. Bármelyiket használhatjuk.
 
 A `kulcs.gpg` minden esetben a *publikus* kulcsunkat tartalmazza. Ahhoz, hogy valaki ellenőrizni tudja
 azt, amit én aláírok, rendelkeznie kell ezzel a publikus kulccsal.
 
- * Aláírás: *titkos kulcs*
- * Ellenőrzés: *publikus kulcs*
+ * Aláírás: *titkos kulcssal*
+ * Ellenőrzés: *publikus kulcssal*
 
 #### Aláírás
+
+A következőkben az `uzenet.txt` fájlt fogjuk aláírni. (Tehát valamilyen tanult módon, például `mcedit` segítségével
+először el kell készíteni az `uzenet.txt` fájlt, aminek a tartalma tetszőleges lehet.)
+
+Az aláírást kétféle módon tudjuk elvégezni. Az első módszer használatával egy olyan kimeneti fájl keletkezik, amelyik *egyben* tartalmazza
+az eredeti dokumentumot és a digitális aláírást. Ennek előnye, hogy mivel egyetlen fájl hordozza a dokumentumot és az aláírást, ezek
+nem tudnak egymástól függetlenül "elkeveredni". Hátránya, hogy így az eredeti fájlhoz közvetlenül nem férünk hozzá.
+(Ez egyben előny is lehet, hiszen így egy véletlen automatikus mentéssel nem fogjuk a dokumentumot akaratlanul módosítani.)
+
+Az aláírás létrehozása ezesetben a következő:
 
 ```bash
 gpg --sign uzenet.txt
@@ -344,6 +375,19 @@ gpg --sign --armor --default-key 'vg@electrit.hu' uzenet.txt
 ```
 
 A `--armor` kapcsolóval a keletkezett fájl ASCII formátumú lesz.
+
+
+A másik módszer szerint egy *leválasztott* aláírást hozunk létre. Ekkor az eredeti fájl változatlan formában megmarad és használható.
+Ez főleg nagy méretű, nem módosítandó fájlok (például CD és DVD képfájlok) esetében hasznos.
+
+Itt az alap parancs a következő:
+
+
+```bash
+gpg --detach-sign uzenet.txt
+```
+
+Az egyes kiegészítő kapcsolók (`--armor`, `--default-key`) itt is használhatóak.
 
 #### Ellenőrzés
 
