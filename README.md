@@ -246,7 +246,7 @@ Ahhoz, hogy ezek valamelyikét használni tudjuk, a következőkre van szükség
  * A titkosító eljárás kiválasztására (ez lehet például **DES, 3DES, vagy AES**).
  * A blokkméret és a kulcsméret kiválasztása (amennyiben többfélével is működik az algoritmus). Az AES esetében **128, 192 és 256 bites** verziók közül választhatunk.
  * A blokk kódoló használati módjának kiválasztására. Ez **ECB, CBC, OFB, CFB, vagy CTR** lehet. Az OpenSSL nem implementálja az összes lehetséges kombinációt.
- * A kulcselőállátási algoritmusra (key derivation function). Ez a továbbiakban minden esetben a **PBKDF2** lesz. Ez az algoritmus egy jelszóból egy, a titkosításhoz szükséges kulcsot tud előállítani. A további példákban azt is megadjuk, hogy a jelszó legyen **sózvaa**.
+ * A kulcselőállátási algoritmusra (key derivation function). Ez a továbbiakban minden esetben a **PBKDF2** lesz. Ez az algoritmus egy jelszóból egy, a titkosításhoz szükséges kulcsot tud előállítani. A további példákban azt is megadjuk, hogy a jelszó legyen **sózva**.
 
 #### Titkosítás
 
@@ -259,7 +259,7 @@ openssl aes-256-cbc -a -salt -pbkdf2 -in nyiltszoveg.txt -out titkosszoveg.enc
 
 #### Visszafejtés
 
-A visszgafejtésnél a `titkosszoveg.enc` fájlt fejtjük vissza, ezzel előállítva az `uj_nyiltszoveg.txt`-t. A visszafejtésnél
+A visszafejtésnél a `titkosszoveg.enc` fájlt fejtjük vissza, ezzel előállítva az `uj_nyiltszoveg.txt`-t. A visszafejtésnél
 ugyanazt a működési módot kell használni, mint a titkosításnál.
 
 ```bash
